@@ -15,22 +15,22 @@ public class Convertor_binario {
         bits[0] = 0;
 
         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();// es meramente estético.
-
-        for (int i = 0; i < amount_bits; i++) {
+        for (int i = 1; i < amount_bits; i++) {
             do {
-                int value = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el bit para su numero binario: "));
-
-                if (value == 0 || value == 1) {
-
-                    bits[i + 1] = value;
-                    next_step = true;
-                } else {
-                    System.out.println("DEBE INGRESAR UN VALOR COMO 1 O 0, NO PUEDE SER DIFERENTE DE ELLO.");
+                try {
+                    int value = Integer
+                            .parseInt(JOptionPane.showInputDialog("Ingrese el bit para su numero binario: "));
+                    if (value == 0 || value == 1) {
+                        bits[i] = value;
+                        next_step = true;
+                    } else {
+                        System.out.println("DEBE INGRESAR UN VALOR COMO 1 O 0, NO PUEDE SER DIFERENTE DE ELLO.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.err.println("DEBE INGRESAR VALORES NUMERICOS");
                 }
+
             } while (!next_step);
-
-            // mas 1, para que no afecte el signo
-
         }
         change(bits);
         C2(bits);
