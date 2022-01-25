@@ -18,10 +18,10 @@ public class Convertor_binario {
         for (int i = 1; i < amount_bits; i++) {
             do {
                 try {
-                    int value = Integer
+                    int bit = Integer
                             .parseInt(JOptionPane.showInputDialog("Ingrese el bit para su numero binario: "));
-                    if (value == 0 || value == 1) {
-                        bits[i] = value;
+                    if (bit == 0 || bit == 1) {
+                        bits[i] = bit;
                         next_step = true;
                     } else {
                         System.out.println("DEBE INGRESAR UN VALOR COMO 1 O 0, NO PUEDE SER DIFERENTE DE ELLO.");
@@ -29,7 +29,6 @@ public class Convertor_binario {
                 } catch (NumberFormatException e) {
                     System.err.println("DEBE INGRESAR VALORES NUMERICOS");
                 }
-
             } while (!next_step);
         }
         change(bits);
