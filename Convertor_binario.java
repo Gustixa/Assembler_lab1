@@ -32,13 +32,8 @@ public class Convertor_binario {
             // mas 1, para que no afecte el signo
 
         }
-        C2(bits);
-        /**
-         * for (int i = 0; i < amount_bits; i++) {
-         * System.out.println(bits[i]);
-         * }
-         */
-
+        change(bits);
+        // C2(bits);
     }
 
     /**
@@ -68,19 +63,32 @@ public class Convertor_binario {
     }
 
     /**
+     * Metodo que devuelve el valor binario con su magnitud y singo
      * 
+     * @param bits: int[]
+     * @throws IOException
+     * @throws InterruptedException
      */
-    private static void C1(int bits[]) throws IOException, InterruptedException {
-
+    private static void change(int bits[]) throws IOException, InterruptedException {
+        bits[0] = 1;
+        int value;
+        System.out.println("El primer valor representa el signo del numero 0-positivo, 1-negativo");
+        for (int i = 0; i < bits.length; i++) {
+            System.out.print(bits[i]);
+        }
     }
 
     /**
      * 
+     * @param bits
+     * @throws IOException
+     * @throws InterruptedException
      */
     private static void C2(int bits[]) throws IOException, InterruptedException {
         // Aumento del arreglo en caso de Overflow.
         int[] complement_a2 = new int[bits.length + 3];
         complement_a2 = bits;
+        int value = 0, carry = 0;
         for (int i = 0; i < bits.length; i++) {
             if (complement_a2[i + 1] == 0) {
                 complement_a2[i + 1] = 1;
@@ -88,11 +96,21 @@ public class Convertor_binario {
                 complement_a2[i + 1] = 0;
             }
         }
-        // Modificar
-        int value = complement_a2[bits.length - 1] + 1;
+        value = complement_a2[bits.length - 1] + 1;
+        // 0 101101 + 1 = 101110
+        do {
 
-        for (int i = 0; i < bits.length; i++) {
-            complement_a2[bits.length - 1] += 1;
+        } while (value == 2);
+        if (value == 2) {
+            complement_a2[bits.length - 1] = 0;
+            carry = 1;
+            for (int i = 1; i < (bits.length + 1); i++) {
+                complement_a2[(bits.length - i) - 1] = 0;
+            }
+
+        } else if (value == 1) {
+            complement_a2[bits.length - 1] = 1;
         }
+
     }
 }
