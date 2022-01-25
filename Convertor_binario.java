@@ -33,7 +33,7 @@ public class Convertor_binario {
 
         }
         change(bits);
-        // C2(bits);
+        C2(bits);
     }
 
     /**
@@ -88,29 +88,33 @@ public class Convertor_binario {
         // Aumento del arreglo en caso de Overflow.
         int[] complement_a2 = new int[bits.length + 3];
         complement_a2 = bits;
+        complement_a2[0] = 1;
         int value = 0, carry = 0;
-        for (int i = 0; i < bits.length; i++) {
-            if (complement_a2[i + 1] == 0) {
-                complement_a2[i + 1] = 1;
-            } else if (complement_a2[i + 1] == 1) {
-                complement_a2[i + 1] = 0;
+        for (int i = 1; i < bits.length; i++) {
+            if (complement_a2[i] == 0) {
+                complement_a2[i] = 1;
+            } else if (complement_a2[i] == 1) {
+                complement_a2[i] = 0;
             }
         }
         value = complement_a2[bits.length - 1] + 1;
         // 0 101101 + 1 = 101110
-        do {
 
-        } while (value == 2);
         if (value == 2) {
             complement_a2[bits.length - 1] = 0;
             carry = 1;
             for (int i = 1; i < (bits.length + 1); i++) {
-                complement_a2[(bits.length - i) - 1] = 0;
+                do {
+                    complement_a2[(bits.length - i) - 1] += 1;
+                } while (complement_a2[(bits.length - i) - 1] == 2);
             }
 
         } else if (value == 1) {
             complement_a2[bits.length - 1] = 1;
         }
-
+        System.out.println();
+        for (int i = 0; i < bits.length; i++) {
+            System.out.print(bits[i]);
+        }
     }
 }
